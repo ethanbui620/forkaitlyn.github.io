@@ -6,12 +6,44 @@
   <title>Cat Meow</title>
   <style>
 body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  background: #95c8fc;
+<style>
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background: #95c8fc; /* 👈 THIS LINE */
+  }
+
+  .wrap {
+    text-align: center;
+    padding: 24px;
+  }
+
+  img {
+    width: min(320px, 80vw);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    cursor: pointer;
+  }
+
+  p {
+    margin-top: 16px;
+    font-size: 18px;
+    color: white; /* optional but recommended */
+  }
+
+  button {
+    margin-top: 16px;
+    padding: 10px 14px;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background: #ffffff;
+  }
+</style>
+
 }
   </style>
 </head>
