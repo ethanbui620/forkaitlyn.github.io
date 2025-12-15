@@ -15,6 +15,7 @@
 <body>
   <div class="wrap">
     <p>Tap the cat kaitlyn</p>
+    <p id="counter">Taps: 0</p>
     <img id="cat" src="cat.jpg" alt="Cat" />
     <div>
       <button id="btn">Meow</button>
@@ -22,19 +23,37 @@
     <audio id="meow" src="meow.mp3" preload="auto"></audio>
   </div>
 
-  <script>
-    const audio = document.getElementById("meow");
-    const play = async () => {
-      try {
-        audio.currentTime = 0;
-        await audio.play(); // iPhone requires a user tap to allow audio
-      } catch (e) {
-        console.log("Audio blocked until user interaction:", e);
-      }
-    };
+<script>
+  const audio = document.getElementById("meow");
+  const cat = document.getElementById("cat");
+  const btn = document.getElementById("btn");
+  const counterEl = document.getElementById("counter");
 
-    document.getElementById("cat").addEventListener("click", play);
-    document.getElementById("btn").addEventListener("click", play);
-  </script>
+  let taps = Number(localStorage.getItem("taps")) || 0;
+  counterEl.textContent = `Taps: ${taps}`;
+
+  function handleTap(e) {
+    audio.muted = false;
+    audio.volume = 1.0;
+    audio.currentTime = 0;
+
+    audio.play().catch(() => {});
+
+    taps += 1;
+    localStorage.setItem("taps", taps);
+    counterEl.textContent = `Taps: ${taps}`;
+
+    if (e) e.preventDefault?.();
+  }
+
+  cat.addEventListener("touchstart", handleTap, { passive: false });
+  cat.addEventListener("click", handleTap);
+
+  if (btn) {
+    btn.addEventListener("touchstart", handleTap, { passive: false });
+    btn.addEventListener("click", handleTap);
+  }
+</script>
+
 </body>
 </html>
