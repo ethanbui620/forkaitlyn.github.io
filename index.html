@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cat Meow</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; display: grid; place-items: center; height: 100vh; }
+    .wrap { text-align: center; padding: 24px; }
+    img { width: min(320px, 80vw); border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,.2); cursor: pointer; }
+    p { margin-top: 16px; font-size: 18px; }
+    button { margin-top: 16px; padding: 10px 14px; font-size: 16px; border-radius: 12px; border: 1px solid #ddd; background: #fff; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p>Tap the cat 🐱</p>
+    <img id="cat" src="cat.jpg" alt="Cat" />
+    <div>
+      <button id="btn">Meow</button>
+    </div>
+    <audio id="meow" src="meow.mp3" preload="auto"></audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById("meow");
+    const play = async () => {
+      try {
+        audio.currentTime = 0;
+        await audio.play(); // iPhone requires a user tap to allow audio
+      } catch (e) {
+        console.log("Audio blocked until user interaction:", e);
+      }
+    };
+
+    document.getElementById("cat").addEventListener("click", play);
+    document.getElementById("btn").addEventListener("click", play);
+  </script>
+</body>
+</html>
