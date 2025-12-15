@@ -4,91 +4,95 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cat Meow</title>
+
   <style>
-body {
-<style>
-  body {
-    margin: 0;
-    font-family: system-ui, sans-serif;
-    display: grid;
-    place-items: center;
-    height: 100vh;
-    background: #95c8fc; /* 👈 THIS LINE */
-  }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      background: #95c8fc;
+    }
 
-  .wrap {
-    text-align: center;
-    padding: 24px;
-  }
+    .wrap {
+      text-align: center;
+      padding: 24px;
+    }
 
-  img {
-    width: min(320px, 80vw);
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.2);
-    cursor: pointer;
-  }
+    .title {
+      font-size: 22px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 16px;
+    }
 
-  p {
-    margin-top: 16px;
-    font-size: 18px;
-    color: white; /* optional but recommended */
-  }
+    #counter {
+      margin-top: 12px;
+      font-size: 16px;
+      color: white;
+    }
 
-  button {
-    margin-top: 16px;
-    padding: 10px 14px;
-    font-size: 16px;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-    background: #ffffff;
-  }
-</style>
+    img {
+      width: min(320px, 80vw);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      cursor: pointer;
+    }
 
-}
+    button {
+      margin-top: 16px;
+      padding: 10px 14px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      background: #ffffff;
+      cursor: pointer;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <p>Tap the cat kaitlyn</p>
-    <p id="counter">Taps: 0</p>
+    <p class="title">Tap the cat Kaitlyn</p>
+
     <img id="cat" src="cat.jpg" alt="Cat" />
-    <div>
-      <button id="btn">Meow</button>
-    </div>
+
+    <p id="counter">Taps: 0</p>
+
+    <button id="btn">Meow</button>
+
     <audio id="meow" src="meow.mp3" preload="auto"></audio>
   </div>
 
-<script>
-  const audio = document.getElementById("meow");
-  const cat = document.getElementById("cat");
-  const btn = document.getElementById("btn");
-  const counterEl = document.getElementById("counter");
+  <script>
+    const audio = document.getElementById("meow");
+    const cat = document.getElementById("cat");
+    const btn = document.getElementById("btn");
+    const counterEl = document.getElementById("counter");
 
-  let taps = Number(localStorage.getItem("taps")) || 0;
-  counterEl.textContent = `Taps: ${taps}`;
-
-  function handleTap(e) {
-    audio.muted = false;
-    audio.volume = 1.0;
-    audio.currentTime = 0;
-
-    audio.play().catch(() => {});
-
-    taps += 1;
-    localStorage.setItem("taps", taps);
+    let taps = Number(localStorage.getItem("taps")) || 0;
     counterEl.textContent = `Taps: ${taps}`;
 
-    if (e) e.preventDefault?.();
-  }
+    function handleTap(e) {
+      audio.muted = false;
+      audio.volume = 1.0;
+      audio.currentTime = 0;
 
-  cat.addEventListener("touchstart", handleTap, { passive: false });
-  cat.addEventListener("click", handleTap);
+      audio.play().catch(() => {});
 
-  if (btn) {
+      taps += 1;
+      localStorage.setItem("taps", taps);
+      counterEl.textContent = `Taps: ${taps}`;
+
+      if (e) e.preventDefault?.();
+    }
+
+    cat.addEventListener("touchstart", handleTap, { passive: false });
+    cat.addEventListener("click", handleTap);
+
     btn.addEventListener("touchstart", handleTap, { passive: false });
     btn.addEventListener("click", handleTap);
-  }
-</script>
-
+  </script>
 </body>
 </html>
